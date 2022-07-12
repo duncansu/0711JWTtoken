@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.AuthRequest;
 import com.example.demo.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ public class AuthController {
 
     @PostMapping(value = "/")
     public ResponseEntity<?> getToken(@RequestBody AuthRequest authRequest) {
-        return authService.getToken(authRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(authService.getToken(authRequest));
+
     }
 }

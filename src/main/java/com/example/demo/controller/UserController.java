@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.FinalUser;
 import com.example.demo.model.Register;
 import com.example.demo.service.UserService;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

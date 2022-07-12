@@ -15,4 +15,5 @@ public interface UserService {
     public List<FinalUser> getAllUser();
 
     public ResponseEntity<?> getOneUser(String id);
+
 }
