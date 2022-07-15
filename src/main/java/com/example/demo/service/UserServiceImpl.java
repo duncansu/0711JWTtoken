@@ -19,6 +19,7 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -34,9 +35,9 @@ public class UserServiceImpl implements UserService {
         String passwordDigest = passwordEncoder.encode(password);
 
         FinalUser user = new FinalUser(id, register.getEmail(), passwordDigest, register.getName());
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
 
-        return ResponseEntity.ok(Map.of("userId", user.getId().toString()));
+        return ResponseEntity.ok(Map.of("userId", user.getUuid().toString()));
     }
 
     @Override
@@ -53,4 +54,16 @@ public class UserServiceImpl implements UserService {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "not found record"));
     }
+    public void deleteByName(String name){
+        userRepository.deleteByName(name);
+    }
+    public List<FinalUser> UpdateTheInformation(String name,String email){
+        return userRepository.UpdateTheInformation(name,email);
+    }
+    public Optional<FinalUser> findByName(String name){
+        return userRepository.findByName(name);
+    }
+   public  Optional<FinalUser> findByEmail(String email){
+        return userRepository.findByEmail(email);
+   };
 }

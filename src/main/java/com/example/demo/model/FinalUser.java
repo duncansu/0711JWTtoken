@@ -8,8 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,15 +20,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "final_user")
 public class FinalUser  implements UserDetails{
+    @Column(name = "id",nullable = false)
     @Id
-    private UUID id;
-
+    private UUID uuid;
+    @Column(name="email",nullable = true)
     private String email;
 
     @JsonIgnore
+    @Column(name="passwordDigest",nullable = true)
     private String passwordDigest;
-
+    @Column(name = "name",nullable = true)
     private String name;
 
     @Override
@@ -45,7 +50,7 @@ public class FinalUser  implements UserDetails{
     @JsonIgnore
     @Override
     public String getUsername() {
-        return getId().toString();
+        return getUuid().toString();
     }
 
     @JsonIgnore
