@@ -4,8 +4,6 @@ import com.example.demo.model.FinalUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,6 +24,9 @@ public interface UserRepository extends JpaRepository<FinalUser, UUID> {
 
     @Query("select b from FinalUser b where b.name = ?1")
     Optional<FinalUser>findByName(String author);
+    @Modifying
+    @Query("update FinalUser b set b.status= ?1 where b.name= ?2 ")
+    void updatestatus(boolean aa,String name);
 
 
 }
